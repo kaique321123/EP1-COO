@@ -85,14 +85,13 @@ public class Ball {
 
 	public void onPlayerCollision(String playerId) {
 
-		// se a bola estiver indo para a esquerda, ela vai para a direita
 		double positiveSpeed = (speed < 0) ? -this.speed : this.speed;
 
 		if (playerId.equals("Player 1")) {
 			// se a bola estiver indo para a esquerda, ela vai para a direita
 			this.dx = positiveSpeed;
 		} else {
-			// não era para precisar inverter, mas deu certo
+			// se a bola estiver indo para a direita, ela vai para a esquerda
 			this.dx = -positiveSpeed;
 		}
 	}
@@ -105,8 +104,10 @@ public class Ball {
 
 	public void onWallCollision(String wallId) {
 
+		// se a bola estiver indo para a esquerda, ela vai para a direita
 		double positiveSpeed = (speed < 0) ? -speed : speed;
 
+		// inverte a direção da bola de acordo com a parede
 		switch (wallId) {
 			case Pong.TOP:
 				this.dy = positiveSpeed;
@@ -133,8 +134,11 @@ public class Ball {
 	 */
 
 	public boolean checkCollision(Wall wall) {
+
+		// Verifica se a bola está dentro da área da parede
 		String id = wall.getId();
 
+		// Verifica se a bola colidiu com a parede
 		switch (id) {
 			case Pong.TOP:
 				if (this.cy - (this.height / 2) <= wall.getCy() + (wall.getHeight() / 2))
@@ -167,6 +171,7 @@ public class Ball {
 	 */
 
 	public boolean checkCollision(Player player) {
+
 		// Verifica se a bola está dentro da área do jogador
 		boolean ballIsLeftOfPlayer = cx - (width / 2) < player.getCx() + (player.getWidth() / 2);
 		boolean ballIsRightOfPlayer = cx + (width / 2) > player.getCx() - (player.getWidth() / 2);
@@ -175,10 +180,10 @@ public class Ball {
 
 		boolean isInsidePlayer = ballIsLeftOfPlayer && ballIsRightOfPlayer && ballIsAbovePlayer && ballIsBelowPlayer;
 
-		// Verifica se o jogador é o PLAYER1 ou PLAYER2
+		// Verifica se o jogador é o Player 1 ou o Player 2
 		boolean isPlayer1OrPlayer2 = player.getId().equals(Pong.PLAYER1) || player.getId().equals(Pong.PLAYER2);
 
-		// Retorna true se a bola está dentro da área do jogador e o jogador é o PLAYER1 ou PLAYER2
+		// Retorna true se a bola está dentro da área do jogador e o jogador é o Player 1 ou o Player 2
 		return isInsidePlayer && isPlayer1OrPlayer2;
 	}
 
