@@ -1,0 +1,4 @@
+Kaique de Jesus Pessoa Santos
+Nº USP 14677144
+
+Para compilar e executar o programa digite make apenas e pronto
