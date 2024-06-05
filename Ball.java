@@ -31,9 +31,9 @@ public class Ball {
 	private double height;
 	private Color color;
 	private double speed;
-	// direção da bola na horizontal
+	//Direção da bola na horizontal
 	private double dx;
-	// direção da bola na vertical
+	//Direção da bola na vertical
 	private double dy;
 
 	public Ball(double cx, double cy, double width, double height, Color color, double speed) {
@@ -45,10 +45,10 @@ public class Ball {
 		this.color = color;
 		this.speed = speed;
 
-		// Define a direção da bola aleatóriamente
+		//Define a direção da bola aleatóriamente
 		Random random = new Random();
-		// se for 1, a bola vai para a direita ou para cima
-		// se for -1, a bola vai para a esquerda ou para baixo
+		//Se for 1, a bola vai para a direita ou para cima
+		//Se for -1, a bola vai para a esquerda ou para baixo
 		this.dx = random.nextInt(2) == 0 ? 1 : -1;
 		this.dy = random.nextInt(2) == 0 ? 1 : -1;
 	}
@@ -88,10 +88,10 @@ public class Ball {
 		double positiveSpeed = (speed < 0) ? -this.speed : this.speed;
 
 		if (playerId.equals("Player 1")) {
-			// se a bola estiver indo para a esquerda, ela vai para a direita
+			// Se a bola estiver indo para a esquerda, ela vai para a direita
 			this.dx = positiveSpeed;
 		} else {
-			// se a bola estiver indo para a direita, ela vai para a esquerda
+			// Se a bola estiver indo para a direita, ela vai para a esquerda
 			this.dx = -positiveSpeed;
 		}
 	}
@@ -104,10 +104,10 @@ public class Ball {
 
 	public void onWallCollision(String wallId) {
 
-		// se a bola estiver indo para a esquerda, ela vai para a direita
+		// Se a bola estiver indo para a esquerda, ela vai para a direita
 		double positiveSpeed = (speed < 0) ? -speed : speed;
 
-		// inverte a direção da bola de acordo com a parede
+		// Inverte a direção da bola de acordo com a parede
 		switch (wallId) {
 			case Pong.TOP:
 				this.dy = positiveSpeed;
@@ -172,18 +172,20 @@ public class Ball {
 
 	public boolean checkCollision(Player player) {
 
-		// Verifica se a bola está dentro da área do jogador
+		// Criei essas variáveis para facilitar a leitura do código
 		boolean ballIsLeftOfPlayer = cx - (width / 2) < player.getCx() + (player.getWidth() / 2);
 		boolean ballIsRightOfPlayer = cx + (width / 2) > player.getCx() - (player.getWidth() / 2);
 		boolean ballIsAbovePlayer = cy - (height / 2) < player.getCy() + (player.getHeight() / 2);
 		boolean ballIsBelowPlayer = cy + (height / 2) > player.getCy() - (player.getHeight() / 2);
 
+		// verificar se a bola está dentro da área do jogador
 		boolean isInsidePlayer = ballIsLeftOfPlayer && ballIsRightOfPlayer && ballIsAbovePlayer && ballIsBelowPlayer;
 
-		// Verifica se o jogador é o Player 1 ou o Player 2
+		// Verificar se o jogador é o Player 1 ou o Player 2
 		boolean isPlayer1OrPlayer2 = player.getId().equals(Pong.PLAYER1) || player.getId().equals(Pong.PLAYER2);
 
-		// Retorna true se a bola está dentro da área do jogador e o jogador é o Player 1 ou o Player 2
+		// Retorna true se a bola está dentro da área do jogador e o jogador é o Player
+		// 1 ou o Player 2
 		return isInsidePlayer && isPlayer1OrPlayer2;
 	}
 
