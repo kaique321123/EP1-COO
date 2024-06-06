@@ -184,8 +184,7 @@ public class Ball {
 		// Verificar se o jogador é o Player 1 ou o Player 2
 		boolean isPlayer1OrPlayer2 = player.getId().equals(Pong.PLAYER1) || player.getId().equals(Pong.PLAYER2);
 
-		// Retorna true se a bola está dentro da área do jogador e o jogador é o Player
-		// 1 ou o Player 2
+		// Retorna true se a bola está dentro da área do jogador e o jogador é o Player 1 ou o Player 2
 		return isInsidePlayer && isPlayer1OrPlayer2;
 	}
 
